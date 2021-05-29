@@ -16,6 +16,7 @@ function initI18n(locale, fallback) {
     locale,
     fallbackLocale: fallback,
     silentFallbackWarn: true,
+    silentTranslationWarn: true
   }
   return new VueI18n(i18nOptions)
 }

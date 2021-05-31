@@ -1,6 +1,6 @@
 <template>
   <div class="standard-table">
-    <div class="alert">
+    <!-- <div class="alert">
       <a-alert type="info" :show-icon="true" v-if="selectedRows">
         <div class="message" slot="message">
           已选择&nbsp;<a>{{selectedRows.length}}</a>&nbsp;项 <a class="clear" @click="onClear">清空</a>
@@ -12,27 +12,31 @@
           </template>
         </div>
       </a-alert>
-    </div>
-    <a-table
-      :bordered="bordered"
-      :loading="loading"
-      :columns="columns"
-      :dataSource="dataSource"
-      :rowKey="rowKey"
-      :pagination="pagination"
-      :expandedRowKeys="expandedRowKeys"
-      :expandedRowRender="expandedRowRender"
-      @change="onChange"
-      :rowSelection="selectedRows ? {selectedRowKeys: selectedRowKeys, onChange: updateSelect} : undefined"
-    >
-      <template slot-scope="text, record, index" :slot="slot" v-for="slot in Object.keys($scopedSlots).filter(key => key !== 'expandedRowRender') ">
-        <slot :name="slot" v-bind="{text, record, index}"></slot>
+    </div> -->
+    <a-table :bordered="bordered"
+             :loading="loading"
+             :columns="columns"
+             :dataSource="dataSource"
+             :rowKey="rowKey"
+             :pagination="pagination"
+             :expandedRowKeys="expandedRowKeys"
+             :expandedRowRender="expandedRowRender"
+             @change="onChange"
+             :rowSelection="selectedRows ? {selectedRowKeys: selectedRowKeys, onChange: updateSelect} : undefined">
+      <template slot-scope="text, record, index"
+                :slot="slot"
+                v-for="slot in Object.keys($scopedSlots).filter(key => key !== 'expandedRowRender') ">
+        <slot :name="slot"
+              v-bind="{text, record, index}"></slot>
       </template>
-      <template :slot="slot" v-for="slot in Object.keys($slots)">
+      <template :slot="slot"
+                v-for="slot in Object.keys($slots)">
         <slot :name="slot"></slot>
       </template>
-      <template slot-scope="record, index, indent, expanded" :slot="$scopedSlots.expandedRowRender ? 'expandedRowRender' : ''">
-        <slot v-bind="{record, index, indent, expanded}" :name="$scopedSlots.expandedRowRender ? 'expandedRowRender' : ''"></slot>
+      <template slot-scope="record, index, indent, expanded"
+                :slot="$scopedSlots.expandedRowRender ? 'expandedRowRender' : ''">
+        <slot v-bind="{record, index, indent, expanded}"
+              :name="$scopedSlots.expandedRowRender ? 'expandedRowRender' : ''"></slot>
       </template>
     </a-table>
   </div>
@@ -78,12 +82,12 @@ export default {
         })
       return totalList
     },
-    onClear() {
+    onClear () {
       this.updateSelect([], [])
       this.$emit('clear')
     },
-    onChange(pagination, filters, sorter, {currentDataSource}) {
-      this.$emit('change', pagination, filters, sorter, {currentDataSource})
+    onChange (pagination, filters, sorter, { currentDataSource }) {
+      this.$emit('change', pagination, filters, sorter, { currentDataSource })
     }
   },
   created () {
@@ -96,9 +100,9 @@ export default {
           ...item,
           total: selectedRows.reduce((sum, val) => {
             let v
-            try{
+            try {
               v = val[item.dataIndex] ? val[item.dataIndex] : eval(`val.${item.dataIndex}`);
-            }catch(_){
+            } catch (_) {
               v = val[item.dataIndex];
             }
             v = !isNaN(parseFloat(v)) ? parseFloat(v) : 0;
@@ -109,7 +113,7 @@ export default {
     }
   },
   computed: {
-    selectedRowKeys() {
+    selectedRowKeys () {
       return this.selectedRows.map(record => {
         return (typeof this.rowKey === 'function') ? this.rowKey(record) : record[this.rowKey]
       })
@@ -119,15 +123,15 @@ export default {
 </script>
 
 <style scoped lang="less">
-.standard-table{
-  .alert{
+.standard-table {
+  .alert {
     margin-bottom: 16px;
-    .message{
-      a{
+    .message {
+      a {
         font-weight: 600;
       }
     }
-    .clear{
+    .clear {
       float: right;
     }
   }

@@ -52,7 +52,7 @@ const options = {
           ]
         },
         {
-          path: 'dashboardeeeecx',
+          path: 'product_in',
           name: '入库管理',
           meta: {
             icon: 'codepen'
@@ -60,18 +60,18 @@ const options = {
           component: BlankView,
           children: [
             {
-              path: 'workplace',
-              name: '入库',
+              path: 'query',
+              name: '入库查询',
               meta: {
                 page: {
                 }
               },
-              component: () => import('@/pages/dashboard/workplace'),
+              component: () => import('@/pages/list/QueryList'),
             }
           ]
         },
         {
-          path: 'dashboard1233',
+          path: 'product_out',
           name: '出库管理',
           meta: {
             icon: 'shop'
@@ -184,7 +184,14 @@ const options = {
             }
           ]
         },
-
+        {
+          name: '使用文档',
+          path: 'document',
+          meta: {
+            icon: 'file-word',
+            link: 'https://iczer.gitee.io/vue-antd-admin-docs/'
+          }
+        }
         // {
         //   path: 'form',
         //   name: '表单页',
@@ -400,14 +407,7 @@ const options = {
         //     link: 'https://www.antdv.com/docs/vue/introduce-cn/'
         //   }
         // },
-        // {
-        //   name: '使用文档',
-        //   path: 'document',
-        //   meta: {
-        //     icon: 'file-word',
-        //     link: 'https://iczer.gitee.io/vue-antd-admin-docs/'
-        //   }
-        // }
+
       ]
     },
   ]

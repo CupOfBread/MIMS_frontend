@@ -21,6 +21,7 @@
              :pagination="pagination"
              :expandedRowKeys="expandedRowKeys"
              :expandedRowRender="expandedRowRender"
+             :scroll="scroll"
              @change="onChange"
              :rowSelection="selectedRows ? {selectedRowKeys: selectedRowKeys, onChange: updateSelect} : undefined">
       <template slot-scope="text, record, index"
@@ -50,6 +51,7 @@ export default {
     loading: [Boolean, Object],
     columns: Array,
     dataSource: Array,
+    scroll: Object,
     rowKey: {
       type: [String, Function],
       default: 'key'

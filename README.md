@@ -17,6 +17,24 @@ Java课程设计 MIMS前端部分
 | vue-router | 3.3.4 |
 | .... | .... |
 
+## Project setup
+
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+
+```
+npm run build
+```
+
 ## Thanks
 - [Vue](https://cn.vuejs.org/)
 - [Ant Design of Vue](https://www.antdv.com/docs/vue/introduce-cn/)

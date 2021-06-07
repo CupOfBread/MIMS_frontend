@@ -1,10 +1,17 @@
 # MIMS_frontend
+[![](https://img.shields.io/github/license/CupOfBread/MIMS?)](https://github.com/CupOfBread/MIMS_frontend/blob/master/LICENSE)
+![](https://img.shields.io/github/commit-activity/m/CupOfBread/MIMS_frontend?color=brightgreen)
+![](https://img.shields.io/github/repo-size/CupOfBread/MIMS_frontend)
+
+Back-end part: [Back-end Part](https://github.com/CupOfBread/MIMS)
+
 
 ## Introduce
 
-Manufacturing information management system
+Manufacturing Information Management System.  
+This is a Java course design project. It can also be used in actual production environments.  
+The front end uses the Vue.js framework of JavaScript. The back end uses the Springboot of Java. Make issues when you meet bugs, invalid codes. Suggestions and Pull Requests for this project are always welcome. 
 
-Java课程设计 MIMS前端部分
 
 ## Dependency
 | dependency | version |
@@ -40,3 +47,5 @@ npm run build
 - [Ant Design of Vue](https://www.antdv.com/docs/vue/introduce-cn/)
 - [Vue Antd Admin](https://iczer.gitee.io/vue-antd-admin-docs/)
 
+## License
+- MPL 2.0

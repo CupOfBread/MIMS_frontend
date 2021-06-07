@@ -60,13 +60,13 @@ const options = {
           component: BlankView,
           children: [
             {
-              path: 'query',
+              path: 'record',
               name: '入库查询',
               meta: {
                 page: {
                 }
               },
-              component: () => import('@/pages/list/QueryList'),
+              component: () => import('@/pages/productIn/Record'),
             }
           ]
         },
@@ -79,18 +79,18 @@ const options = {
           component: BlankView,
           children: [
             {
-              path: 'workplace',
-              name: '入库',
+              path: 'record',
+              name: '出库查询',
               meta: {
                 page: {
                 }
               },
-              component: () => import('@/pages/dashboard/workplace'),
+              component: () => import('@/pages/productOut/Record'),
             }
           ]
         },
         {
-          path: 'dashboard123333',
+          path: 'inventory',
           name: '库存管理',
           meta: {
             icon: 'file-zip'
@@ -98,37 +98,73 @@ const options = {
           component: BlankView,
           children: [
             {
-              path: 'workplace',
-              name: '入库',
+              path: 'inventory',
+              name: '库存查询',
               meta: {
                 page: {
                 }
               },
-              component: () => import('@/pages/dashboard/workplace'),
+              component: () => import('@/pages/inventoryManage/Inventory'),
+            },
+            {
+              path: 'wt',
+              name: '调拨查询',
+              meta: {
+                page: {
+                }
+              },
+              component: () => import('@/pages/inventoryManage/WarehouseTransfer'),
             }
           ]
         },
         {
-          path: 'dashboard3123123',
-          name: '库存设置',
+          path: 'inventory_config',
+          name: '库存配置',
           meta: {
             icon: 'home'
           },
           component: BlankView,
           children: [
             {
-              path: 'workplace',
-              name: '入库',
+              path: 'supplier',
+              name: '供应商',
               meta: {
                 page: {
                 }
               },
-              component: () => import('@/pages/dashboard/workplace'),
+              component: () => import('@/pages/inventoryConfig/Supplier'),
+            },
+            {
+              path: 'warehosue',
+              name: '仓库管理',
+              meta: {
+                page: {
+                }
+              },
+              component: () => import('@/pages/inventoryConfig/Warehouse'),
+            },
+            {
+              path: 'unit',
+              name: '计量单位',
+              meta: {
+                page: {
+                }
+              },
+              component: () => import('@/pages/inventoryConfig/Unit'),
+            },
+            {
+              path: 'express',
+              name: '快递管理',
+              meta: {
+                page: {
+                }
+              },
+              component: () => import('@/pages/inventoryConfig/Express'),
             }
           ]
         },
         {
-          path: 'dashboard312333123',
+          path: 'product',
           name: '产品管理',
           meta: {
             icon: 'reconciliation'
@@ -136,18 +172,27 @@ const options = {
           component: BlankView,
           children: [
             {
-              path: 'workplace',
-              name: '入库',
+              path: 'category',
+              name: '产品分类',
               meta: {
                 page: {
                 }
               },
-              component: () => import('@/pages/dashboard/workplace'),
+              component: () => import('@/pages/product/Category'),
+            },
+            {
+              path: 'product',
+              name: '产品管理',
+              meta: {
+                page: {
+                }
+              },
+              component: () => import('@/pages/product/Product'),
             }
           ]
         },
         {
-          path: 'dashboard3122333123',
+          path: 'finance',
           name: '财务管理',
           meta: {
             icon: 'wallet'
@@ -155,18 +200,36 @@ const options = {
           component: BlankView,
           children: [
             {
-              path: 'workplace',
-              name: '入库',
+              path: 'record',
+              name: '财务查询',
               meta: {
                 page: {
                 }
               },
-              component: () => import('@/pages/dashboard/workplace'),
+              component: () => import('@/pages/finance/Record'),
+            },
+            {
+              path: 'category',
+              name: '财务分类',
+              meta: {
+                page: {
+                }
+              },
+              component: () => import('@/pages/finance/Category'),
+            },
+            {
+              path: 'bank',
+              name: '银行管理',
+              meta: {
+                page: {
+                }
+              },
+              component: () => import('@/pages/finance/Bank'),
             }
           ]
         },
         {
-          path: 'dashboard312233322123',
+          path: 'user',
           name: '用户管理',
           meta: {
             icon: 'usergroup-add'
@@ -174,22 +237,30 @@ const options = {
           component: BlankView,
           children: [
             {
-              path: 'workplace',
-              name: '入库',
+              path: 'user',
+              name: '用户列表',
               meta: {
                 page: {
                 }
               },
-              component: () => import('@/pages/dashboard/workplace'),
+              component: () => import('@/pages/user/User'),
             }
           ]
         },
         {
-          name: '使用文档',
-          path: 'document',
+          name: 'Vue Antd Admin 使用文档',
+          path: 'document_vaa',
           meta: {
             icon: 'file-word',
             link: 'https://iczer.gitee.io/vue-antd-admin-docs/'
+          }
+        },
+        {
+          name: 'Ant Design of Vue 使用文档',
+          path: 'document_adv',
+          meta: {
+            icon: 'file-word',
+            link: 'https://www.antdv.com/docs/vue/introduce-cn/'
           }
         }
         // {

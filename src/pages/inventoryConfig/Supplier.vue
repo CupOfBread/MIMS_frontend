@@ -125,45 +125,54 @@
 import StandardTable from '@/components/table/StandardTable'
 const columns = [
   {
-    title: '产品',
-    dataIndex: 'no'
+    title: '名称',
+    dataIndex: 'name'
   },
   {
-    title: '供应商',
-    dataIndex: 'description',
+    title: '联系人',
+    dataIndex: 'linkman',
   },
   {
-    title: '创建用户',
-    dataIndex: 'description',
+    title: '手机',
+    dataIndex: 'phone',
   },
   {
-    title: '仓库',
-    dataIndex: 'description',
+    title: '邮编',
+    dataIndex: 'pc',
+  },
+  {
+    title: '传真',
+    dataIndex: 'fax',
+  },
+  {
+    title: '电话',
+    dataIndex: 'tel',
+  },
+  {
+    title: 'EMAIL',
+    dataIndex: 'email',
+  },
+  {
+    title: '地址',
+    dataIndex: 'address',
+  },
+  {
+    title: '网址',
+    dataIndex: 'website',
   },
   {
     title: '创建时间',
-    dataIndex: 'updatedAt',
+    dataIndex: 'createTime',
     sorter: true
   },
   {
-    title: '序列号',
-    dataIndex: 'description',
+    title: '更新时间',
+    dataIndex: 'updateTime',
+    sorter: true
   },
   {
-    title: '产品数据',
-    dataIndex: 'description',
-  },
-  {
-    title: '金额',
-    dataIndex: 'description',
-  },
-  {
-    title: '数量',
-    dataIndex: 'quantity',
-  },
-  {
-    title: '备注',
-    dataIndex: 'description',
+    title: '更新人id',
+    dataIndex: 'uId',
   },
   {
     title: '操作',

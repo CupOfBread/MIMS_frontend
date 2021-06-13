@@ -125,45 +125,16 @@
 import StandardTable from '@/components/table/StandardTable'
 const columns = [
   {
-    title: '产品',
-    dataIndex: 'no'
+    title: '产品id',
+    dataIndex: 'pId'
   },
   {
-    title: '供应商',
-    dataIndex: 'description',
+    title: '仓库id',
+    dataIndex: 'wId',
   },
   {
-    title: '创建用户',
-    dataIndex: 'description',
-  },
-  {
-    title: '仓库',
-    dataIndex: 'description',
-  },
-  {
-    title: '创建时间',
-    dataIndex: 'updatedAt',
-    sorter: true
-  },
-  {
-    title: '序列号',
-    dataIndex: 'description',
-  },
-  {
-    title: '产品数据',
-    dataIndex: 'description',
-  },
-  {
-    title: '金额',
-    dataIndex: 'description',
-  },
-  {
-    title: '数量',
+    title: '仓库数量',
     dataIndex: 'quantity',
-  },
-  {
-    title: '备注',
-    dataIndex: 'description',
   },
   {
     title: '操作',

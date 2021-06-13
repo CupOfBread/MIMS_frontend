@@ -125,45 +125,70 @@
 import StandardTable from '@/components/table/StandardTable'
 const columns = [
   {
-    title: '产品',
-    dataIndex: 'no'
+    title: '序列号',
+    dataIndex: 'serialNumber'
   },
   {
-    title: '供应商',
-    dataIndex: 'description',
+    title: '状态',
+    dataIndex: 'status',
+  },
+  {
+    title: '产品id',
+    dataIndex: 'pId',
   },
   {
     title: '创建用户',
-    dataIndex: 'description',
+    dataIndex: 'uId',
   },
   {
-    title: '仓库',
-    dataIndex: 'description',
+    title: '仓库id',
+    dataIndex: 'wId',
   },
   {
     title: '创建时间',
-    dataIndex: 'updatedAt',
+    dataIndex: 'updateAt',
     sorter: true
   },
   {
-    title: '序列号',
-    dataIndex: 'description',
+    title: '发货日期',
+    dataIndex: 'shipTime',
+    sorter: true
   },
   {
-    title: '产品数据',
-    dataIndex: 'description',
-  },
-  {
-    title: '金额',
-    dataIndex: 'description',
+    title: '折扣',
+    dataIndex: 'discounts',
   },
   {
     title: '数量',
     dataIndex: 'quantity',
   },
   {
+    title: '金额',
+    dataIndex: 'money',
+  },
+  {
+    title: '销售成本',
+    dataIndex: 'cost',
+  },
+  {
+    title: '产品数据',
+    dataIndex: 'productData',
+  },
+  {
+    title: '快递',
+    dataIndex: 'expressId',
+  },
+  {
+    title: '快递单号',
+    dataIndex: 'expressNum',
+  },
+  {
+    title: '地址',
+    dataIndex: 'expressAddr',
+  },
+  {
     title: '备注',
-    dataIndex: 'description',
+    dataIndex: 'remark',
   },
   {
     title: '操作',

@@ -123,6 +123,7 @@
 
 <script>
 import StandardTable from '@/components/table/StandardTable'
+import { request } from '@/utils/request'
 const columns = [
   {
     title: '产品',
@@ -142,7 +143,7 @@ const columns = [
   },
   {
     title: '创建时间',
-    dataIndex: 'updateAt',
+    dataIndex: 'createTime',
     sorter: true
   },
   {
@@ -159,7 +160,7 @@ const columns = [
   },
   {
     title: '金额',
-    dataIndex: 'money',
+    dataIndex: 'amount',
   },
   {
     title: '数量',
@@ -171,18 +172,19 @@ const columns = [
   }
 ]
 
-const dataSource = []
-
-for (let i = 0; i < 100; i++) {
-  dataSource.push({
-    key: i,
-    no: 'NO ' + i,
-    description: '这是一段描述',
-    callNo: Math.floor(Math.random() * 1000),
-    status: Math.floor(Math.random() * 10) % 4,
-    updatedAt: '2018-07-26'
-  })
-}
+let dataSource = [{
+  "amount": 25,
+  "serialNumber": "1",
+  "quantity": 10,
+  "productData": "1",
+  "pId": 7,
+  "remark": "1",
+  "sId": 2,
+  "uId": 1,
+  "wId": 4,
+  "createTime": "2021-06-07T12:00:49.000+00:00",
+  "id": 11
+}]
 
 export default {
   name: 'QueryList',
@@ -197,6 +199,25 @@ export default {
   },
   authorize: {
     deleteRecord: 'delete'
+  },
+  mounted () {
+    let params = {
+      current: 1,
+      size: 20,
+      startTime: '2020/01/01',
+      endTime: '2021/06/09'
+    }
+    let that = this
+    request('/api/product/in/record', 'GET', params, {
+      headers: {
+        'Authorization': '123'
+      }
+    }).then(function (res) {
+      console.log(res.data)
+      // dataSource = res.data.data.productList
+      that.$message.success(res, 3)
+    })
+
   },
   methods: {
     deleteRecord (key) {

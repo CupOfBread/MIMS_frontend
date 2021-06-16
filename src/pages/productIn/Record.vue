@@ -1,6 +1,6 @@
 <template>
   <a-card>
-    <div :class="advanced ? 'search' : null">
+    <!-- <div :class="advanced ? 'search' : null">
       <a-form layout="horizontal">
         <div :class="advanced ? null: 'fold'">
           <a-row>
@@ -67,19 +67,51 @@
         <span style="float: right; margin-top: 3px;">
           <a-button type="primary">查询</a-button>
           <a-button style="margin-left: 8px">重置</a-button>
-          <!-- <a @click="toggleAdvanced"
+          <a @click="toggleAdvanced"
              style="margin-left: 8px">
             {{advanced ? '收起' : '展开'}}
             <a-icon :type="advanced ? 'up' : 'down'" />
-          </a> -->
+          </a>
         </span>
       </a-form>
-    </div>
+    </div> -->
+    <a-modal title="新增入库"
+             :visible="newFromvisible"
+             :confirm-loading="confirmLoading"
+             width="800px"
+             :label-col="labelCol"
+             :wrapper-col="wrapperCol"
+             @ok="handleOk"
+             @cancel="handleCancel">
+      <a-form>
+        <a-form-model-item label="产品ID">
+          <a-input v-model="form.pId" />
+        </a-form-model-item>
+        <a-form-model-item label="供应商ID">
+          <a-input v-model="form.sId" />
+        </a-form-model-item>
+        <a-form-model-item label="仓库ID">
+          <a-input v-model="form.wId" />
+        </a-form-model-item>
+        <a-form-model-item label="序列号">
+          <a-input v-model="form.serialNumber" />
+        </a-form-model-item>
+        <a-form-model-item label="产品数据">
+          <a-input v-model="form.productData" />
+        </a-form-model-item>
+        <a-form-model-item label="金额">
+          <a-input-number v-model="form.amount" />
+        </a-form-model-item>
+        <a-form-model-item label="数量">
+          <a-input-number v-model="form.quantity" />
+        </a-form-model-item>
+      </a-form>
+    </a-modal>
     <div>
       <a-space class="operator">
         <a-button @click="addNew"
                   type="primary">新建</a-button>
-        <a-button>批量操作</a-button>
+        <!-- <a-button>批量操作</a-button>
         <a-dropdown>
           <a-menu @click="handleMenuClick"
                   slot="overlay">
@@ -90,7 +122,7 @@
             更多操作
             <a-icon type="down" />
           </a-button>
-        </a-dropdown>
+        </a-dropdown> -->
       </a-space>
       <standard-table :columns="columns"
                       :dataSource="dataSource"
@@ -104,13 +136,17 @@
         </div>
         <div slot="action"
              slot-scope="{record}">
+          <router-link :to="`/list/query/detail/${record.key}`"
+                       style="margin-right: 8px">
+            <a-icon type="appstore" />编辑详情
+          </router-link><br />
           <a style="margin-right: 8px">
             <a-icon type="edit" />编辑
           </a>
           <a @click="deleteRecord(record.key)">
             <a-icon type="delete" />删除
           </a>
-          <router-link :to="`/list/query/detail/${record.key}`">详情</router-link>
+
         </div>
         <template slot="statusTitle">
           <a-icon @click.native="onStatusTitleClick"
@@ -126,6 +162,10 @@ import StandardTable from '@/components/table/StandardTable'
 import { request } from '@/utils/request'
 const columns = [
   {
+    title: '序列号',
+    dataIndex: 'serialNumber',
+  },
+  {
     title: '产品',
     dataIndex: 'pId'
   },
@@ -134,57 +174,46 @@ const columns = [
     dataIndex: 'sId',
   },
   {
-    title: '创建用户',
-    dataIndex: 'uId',
-  },
-  {
-    title: '仓库id',
+    title: '仓库',
     dataIndex: 'wId',
-  },
-  {
-    title: '创建时间',
-    dataIndex: 'createTime',
-    sorter: true
-  },
-  {
-    title: '序列号',
-    dataIndex: 'serialNumber',
-  },
-  {
-    title: '产品数据',
-    dataIndex: 'productData',
-  },
-  {
-    title: '备注',
-    dataIndex: 'remark',
-  },
-  {
-    title: '金额',
-    dataIndex: 'amount',
+    width: 70
   },
   {
     title: '数量',
     dataIndex: 'quantity',
   },
   {
+    title: '金额',
+    dataIndex: 'amount',
+    sorter: (a, b) => {
+      console.log(a)
+      return a.amount - b.amount;
+    }
+  },
+  {
+    title: '创建时间',
+    dataIndex: 'createTime',
+    align: 'center',
+    sorter: (a, b) => {
+      let aTime = new Date(a.createTime).getTime();
+      let bTime = new Date(b.createTime).getTime();
+      return aTime - bTime;
+    }
+  },
+  {
+    title: '产品数据',
+    dataIndex: 'productData',
+  },
+  {
+    title: '操作用户',
+    dataIndex: 'uId',
+  },
+  {
     title: '操作',
-    scopedSlots: { customRender: 'action' }
+    scopedSlots: { customRender: 'action' },
+    width: 150,
   }
 ]
-
-let dataSource = [{
-  "amount": 25,
-  "serialNumber": "1",
-  "quantity": 10,
-  "productData": "1",
-  "pId": 7,
-  "remark": "1",
-  "sId": 2,
-  "uId": 1,
-  "wId": 4,
-  "createTime": "2021-06-07T12:00:49.000+00:00",
-  "id": 11
-}]
 
 export default {
   name: 'QueryList',
@@ -193,8 +222,17 @@ export default {
     return {
       advanced: true,
       columns: columns,
-      dataSource: dataSource,
-      selectedRows: []
+      dataSource: [],
+      productList: [],
+      supplierList: [],
+      warehouseList: [],
+      userList: [],
+      selectedRows: [],
+      newFromvisible: false,
+      confirmLoading: false,
+      labelCol: { span: 4 },
+      wrapperCol: { span: 14 },
+      form: {}
     }
   },
   authorize: {
@@ -214,10 +252,30 @@ export default {
       }
     }).then(function (res) {
       console.log(res.data)
-      // dataSource = res.data.data.productList
-      that.$message.success(res, 3)
+      let recordList = res.data.data.recordList
+      that.productList = res.data.data.productList
+      that.supplierList = res.data.data.supplierList
+      that.userList = res.data.data.userList
+      that.warehouseList = res.data.data.warehouseList
+      for (let i = 0; i < recordList.length; i++) {
+        let item = recordList[i]
+        item.key = item.id
+        for (let j = 0; j < that.productList.length; j++) {
+          if (item.pId == that.productList[j].id) item.pId = that.productList[j].name
+        }
+        for (let j = 0; j < that.supplierList.length; j++) {
+          if (item.sId == that.supplierList[j].id) item.sId = that.supplierList[j].name
+        }
+        for (let j = 0; j < that.warehouseList.length; j++) {
+          if (item.wId == that.warehouseList[j].id) item.wId = that.warehouseList[j].name
+        }
+        for (let j = 0; j < that.userList.length; j++) {
+          if (item.uId == that.userList[j].id) item.uId = that.userList[j].name
+        }
+        that.dataSource = recordList
+      }
+      that.$message.success("列表拉取成功", 3)
     })
-
   },
   methods: {
     deleteRecord (key) {
@@ -244,20 +302,23 @@ export default {
       // this.$message.info('选中行改变了')
     },
     addNew () {
-      this.dataSource.unshift({
-        key: this.dataSource.length,
-        no: 'NO ' + this.dataSource.length,
-        description: '这是一段描述',
-        callNo: Math.floor(Math.random() * 1000),
-        status: Math.floor(Math.random() * 10) % 4,
-        updatedAt: '2018-07-26'
-      })
+      this.newFromvisible = true
     },
     handleMenuClick (e) {
       if (e.key === 'delete') {
         this.remove()
       }
-    }
+    },
+    handleOk () {
+      this.confirmLoading = true;
+      // setTimeout(() => {
+      //   this.newFromvisible = false;
+      //   this.confirmLoading = false;
+      // }, 2000);
+    },
+    handleCancel () {
+      this.newFromvisible = false;
+    },
   }
 }
 </script>

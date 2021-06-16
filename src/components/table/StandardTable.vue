@@ -21,6 +21,7 @@
              :pagination="pagination"
              :expandedRowKeys="expandedRowKeys"
              :expandedRowRender="expandedRowRender"
+             :sortDirections="['descend', 'ascend']"
              :scroll="scroll"
              @change="onChange"
              :rowSelection="selectedRows ? {selectedRowKeys: selectedRowKeys, onChange: updateSelect} : undefined">

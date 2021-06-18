@@ -75,38 +75,6 @@
         </span>
       </a-form>
     </div> -->
-    <a-modal title="新增入库"
-             :visible="newFromvisible"
-             :confirm-loading="confirmLoading"
-             width="800px"
-             :label-col="labelCol"
-             :wrapper-col="wrapperCol"
-             @ok="handleOk"
-             @cancel="handleCancel">
-      <a-form>
-        <a-form-model-item label="产品ID">
-          <a-input v-model="form.pId" />
-        </a-form-model-item>
-        <a-form-model-item label="供应商ID">
-          <a-input v-model="form.sId" />
-        </a-form-model-item>
-        <a-form-model-item label="仓库ID">
-          <a-input v-model="form.wId" />
-        </a-form-model-item>
-        <a-form-model-item label="序列号">
-          <a-input v-model="form.serialNumber" />
-        </a-form-model-item>
-        <a-form-model-item label="产品数据">
-          <a-input v-model="form.productData" />
-        </a-form-model-item>
-        <a-form-model-item label="金额">
-          <a-input-number v-model="form.amount" />
-        </a-form-model-item>
-        <a-form-model-item label="数量">
-          <a-input-number v-model="form.quantity" />
-        </a-form-model-item>
-      </a-form>
-    </a-modal>
     <div>
       <a-space class="operator">
         <a-button @click="addNew"
@@ -299,25 +267,14 @@ export default {
       this.$message.info('表格状态改变了')
     },
     onSelectChange () {
-      // this.$message.info('选中行改变了')
     },
     addNew () {
-      this.newFromvisible = true
+      this.$router.push('/product_in/add')
     },
     handleMenuClick (e) {
       if (e.key === 'delete') {
         this.remove()
       }
-    },
-    handleOk () {
-      this.confirmLoading = true;
-      // setTimeout(() => {
-      //   this.newFromvisible = false;
-      //   this.confirmLoading = false;
-      // }, 2000);
-    },
-    handleCancel () {
-      this.newFromvisible = false;
     },
   }
 }

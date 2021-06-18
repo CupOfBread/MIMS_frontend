@@ -1,6 +1,6 @@
 import TabsView from '@/layouts/tabs/TabsView'
 import BlankView from '@/layouts/BlankView'
-// import PageView from '@/layouts/PageView'
+import PageView from '@/layouts/PageView'
 
 // 路由配置
 const options = {
@@ -57,8 +57,17 @@ const options = {
           meta: {
             icon: 'codepen'
           },
-          component: BlankView,
+          component: PageView,
           children: [
+            {
+              path: 'add',
+              name: '新增入库',
+              meta: {
+                page: {
+                }
+              },
+              component: () => import('@/pages/productIn/AddRecord'),
+            },
             {
               path: 'record',
               name: '入库查询',

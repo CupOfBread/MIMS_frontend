@@ -35,7 +35,7 @@
       <a-form-item label="日期时间"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="dateTime" />
+        <a-input-number v-model="form.dateTime" />
       </a-form-item>
       <a-form-item label="经办人"
                    :labelCol="{span: 7}"
@@ -50,7 +50,7 @@
 
       <a-form-item style="margin-top: 24px"
                    :wrapperCol="{span: 10, offset: 7}">
-        <a-button type="primary">提交</a-button>
+
         <a-button style="margin-left: 8px">重置</a-button>
       </a-form-item>
     </a-form>

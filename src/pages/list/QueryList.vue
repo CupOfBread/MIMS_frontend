@@ -223,14 +223,7 @@ export default {
       // this.$message.info('选中行改变了')
     },
     addNew () {
-      this.dataSource.unshift({
-        key: this.dataSource.length,
-        no: 'NO ' + this.dataSource.length,
-        description: '这是一段描述',
-        callNo: Math.floor(Math.random() * 1000),
-        status: Math.floor(Math.random() * 10) % 4,
-        updatedAt: '2018-07-26'
-      })
+      this.visible = true
     },
     handleMenuClick (e) {
       if (e.key === 'delete') {

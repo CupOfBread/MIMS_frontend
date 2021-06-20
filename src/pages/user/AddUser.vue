@@ -15,7 +15,8 @@
       <a-form-item label="密码"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input v-model="form.password" />
+        <a-input v-model="form.password"
+                 type="password" />
       </a-form-item>
       <a-form-item label="邮箱"
                    :labelCol="{span: 7}"
@@ -30,12 +31,13 @@
       <a-form-item label="手机"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.phone" />
+        <a-input v-model="form.phone"
+                 type="number" />
       </a-form-item>
 
       <a-form-item style="margin-top: 24px"
                    :wrapperCol="{span: 10, offset: 7}">
-        <a-button type="primary">提交</a-button>
+
         <a-button style="margin-left: 8px">重置</a-button>
       </a-form-item>
     </a-form>

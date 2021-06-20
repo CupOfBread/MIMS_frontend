@@ -30,32 +30,32 @@
       <a-form-item label="电话"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.tel" />
+        <a-input v-model="form.tel" />
       </a-form-item>
       <a-form-item label="EMAIL"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.email" />
+        <a-input v-model="form.email" />
       </a-form-item>
       <a-form-item label="地址"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.address" />
+        <a-input v-model="form.address" />
       </a-form-item>
       <a-form-item label="网址"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.website" />
+        <a-input v-model="form.website" />
       </a-form-item>
       <a-form-item label="更新人id"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.uId" />
+        <a-input v-model="form.uId" />
       </a-form-item>
 
       <a-form-item style="margin-top: 24px"
                    :wrapperCol="{span: 10, offset: 7}">
-        <a-button type="primary">提交</a-button>
+
         <a-button style="margin-left: 8px">重置</a-button>
       </a-form-item>
     </a-form>

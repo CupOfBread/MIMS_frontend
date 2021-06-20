@@ -12,7 +12,7 @@
                    :wrapperCol="{span: 10}">
         <a-input v-model="form.inId" />
       </a-form-item>
-      <a-form-item label="排出仓库"
+      <a-form-item label="拨出仓库"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
         <a-input v-model="form.outId" />
@@ -35,7 +35,7 @@
 
       <a-form-item style="margin-top: 24px"
                    :wrapperCol="{span: 10, offset: 7}">
-        <a-button type="primary">提交</a-button>
+
         <a-button style="margin-left: 8px">重置</a-button>
       </a-form-item>
     </a-form>

@@ -113,7 +113,7 @@
         </template>
       </standard-table>
     </div>
-    <a-modal title="新增银行"
+    <a-modal title="银行"
              :visible="visible"
              @ok="handleOk"
              @cancel="handleCancel">

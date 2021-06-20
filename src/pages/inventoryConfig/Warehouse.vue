@@ -78,7 +78,7 @@
     <div>
       <a-space class="operator">
         <a-button @click="addNew"
-                  type="primary">新建</a-button>
+                  type="primary">新建仓库</a-button>
         <a-button>批量操作</a-button>
         <a-dropdown>
           <a-menu @click="handleMenuClick"
@@ -118,11 +118,18 @@
         </template>
       </standard-table>
     </div>
+    <a-modal title="仓库"
+             :visible="visible"
+             @ok="handleOk"
+             @cancel="handleCancel">
+      <AddWarehouse />
+    </a-modal>
   </a-card>
 </template>
 
 <script>
 import StandardTable from '@/components/table/StandardTable'
+import AddWarehouse from '@/pages/inventoryConfig/AddWarehouse'
 const columns = [
   {
     title: '仓库名称',
@@ -161,13 +168,14 @@ for (let i = 0; i < 100; i++) {
 
 export default {
   name: 'QueryList',
-  components: { StandardTable },
+  components: { StandardTable, AddWarehouse },
   data () {
     return {
       advanced: true,
       columns: columns,
       dataSource: dataSource,
-      selectedRows: []
+      selectedRows: [],
+      visible: false
     }
   },
   authorize: {
@@ -198,19 +206,18 @@ export default {
       // this.$message.info('选中行改变了')
     },
     addNew () {
-      this.dataSource.unshift({
-        key: this.dataSource.length,
-        no: 'NO ' + this.dataSource.length,
-        description: '这是一段描述',
-        callNo: Math.floor(Math.random() * 1000),
-        status: Math.floor(Math.random() * 10) % 4,
-        updatedAt: '2018-07-26'
-      })
+      this.visible = true
     },
     handleMenuClick (e) {
       if (e.key === 'delete') {
         this.remove()
       }
+    },
+    handleOk () {
+
+    },
+    handleCancel () {
+      this.visible = false
     }
   }
 }

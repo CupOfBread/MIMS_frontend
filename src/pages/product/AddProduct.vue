@@ -30,37 +30,37 @@
       <a-form-item label="计量单位"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.unit" />
+        <a-input v-model="form.unit" />
       </a-form-item>
       <a-form-item label="销售价"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.sales" />
+        <a-input v-model="form.sales" />
       </a-form-item>
       <a-form-item label="进货价"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.purchase" />
+        <a-input v-model="form.purchase" />
       </a-form-item>
       <a-form-item label="备注"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.remarks" />
+        <a-input v-model="form.remarks" />
       </a-form-item>
       <a-form-item label="产品分类id"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.cid" />
+        <a-input v-model="form.cid" />
       </a-form-item>
       <a-form-item label="创建员工"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.uid" />
+        <a-input v-model="form.uid" />
       </a-form-item>
 
       <a-form-item style="margin-top: 24px"
                    :wrapperCol="{span: 10, offset: 7}">
-        <a-button type="primary">提交</a-button>
+
         <a-button style="margin-left: 8px">重置</a-button>
       </a-form-item>
     </a-form>

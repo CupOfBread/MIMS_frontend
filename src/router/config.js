@@ -88,6 +88,15 @@ const options = {
           component: BlankView,
           children: [
             {
+              path: 'add',
+              name: '新增出库',
+              meta: {
+                page: {
+                }
+              },
+              component: () => import('@/pages/productOut/AddRecord'),
+            },
+            {
               path: 'record',
               name: '出库查询',
               meta: {

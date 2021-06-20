@@ -2,40 +2,15 @@
   <a-card :body-style="{padding: '24px 32px'}"
           :bordered="false">
     <a-form>
-      <a-form-item label="产品ID"
+      <a-form-item label="分类名称"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input v-model="form.pId" />
+        <a-input v-model="form.name" />
       </a-form-item>
-      <a-form-item label="供应商ID"
+      <a-form-item label="类型"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input v-model="form.sId" />
-      </a-form-item>
-      <a-form-item label="仓库ID"
-                   :labelCol="{span: 7}"
-                   :wrapperCol="{span: 10}">
-        <a-input v-model="form.wId" />
-      </a-form-item>
-      <a-form-item label="序列号"
-                   :labelCol="{span: 7}"
-                   :wrapperCol="{span: 10}">
-        <a-input v-model="form.serialNumber" />
-      </a-form-item>
-      <a-form-item label="产品数据"
-                   :labelCol="{span: 7}"
-                   :wrapperCol="{span: 10}">
-        <a-input v-model="form.productData" />
-      </a-form-item>
-      <a-form-item label="金额"
-                   :labelCol="{span: 7}"
-                   :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.amount" />
-      </a-form-item>
-      <a-form-item label="数量"
-                   :labelCol="{span: 7}"
-                   :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.quantity" />
+        <a-input v-model="form.type" />
       </a-form-item>
 
       <a-form-item style="margin-top: 24px"

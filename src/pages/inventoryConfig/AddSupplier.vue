@@ -2,40 +2,55 @@
   <a-card :body-style="{padding: '24px 32px'}"
           :bordered="false">
     <a-form>
-      <a-form-item label="产品ID"
+      <a-form-item label="名称"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input v-model="form.pId" />
+        <a-input v-model="form.name" />
       </a-form-item>
-      <a-form-item label="供应商ID"
+      <a-form-item label="联系人"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input v-model="form.sId" />
+        <a-input v-model="form.linkman" />
       </a-form-item>
-      <a-form-item label="仓库ID"
+      <a-form-item label="手机"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input v-model="form.wId" />
+        <a-input v-model="form.phone" />
       </a-form-item>
-      <a-form-item label="序列号"
+      <a-form-item label="邮编"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input v-model="form.serialNumber" />
+        <a-input v-model="form.pc" />
       </a-form-item>
-      <a-form-item label="产品数据"
+      <a-form-item label="传真"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input v-model="form.productData" />
+        <a-input v-model="form.fax" />
       </a-form-item>
-      <a-form-item label="金额"
+      <a-form-item label="电话"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.amount" />
+        <a-input-number v-model="form.tel" />
       </a-form-item>
-      <a-form-item label="数量"
+      <a-form-item label="EMAIL"
                    :labelCol="{span: 7}"
                    :wrapperCol="{span: 10}">
-        <a-input-number v-model="form.quantity" />
+        <a-input-number v-model="form.email" />
+      </a-form-item>
+      <a-form-item label="地址"
+                   :labelCol="{span: 7}"
+                   :wrapperCol="{span: 10}">
+        <a-input-number v-model="form.address" />
+      </a-form-item>
+      <a-form-item label="网址"
+                   :labelCol="{span: 7}"
+                   :wrapperCol="{span: 10}">
+        <a-input-number v-model="form.website" />
+      </a-form-item>
+      <a-form-item label="更新人id"
+                   :labelCol="{span: 7}"
+                   :wrapperCol="{span: 10}">
+        <a-input-number v-model="form.uId" />
       </a-form-item>
 
       <a-form-item style="margin-top: 24px"

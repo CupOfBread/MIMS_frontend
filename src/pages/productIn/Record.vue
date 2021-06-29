@@ -211,7 +211,7 @@ export default {
       current: 1,
       size: 20,
       startTime: '2020/01/01',
-      endTime: '2021/06/09'
+      endTime: '2022/06/09'
     }
     let that = this
     request('/api/product/in/record', 'GET', params, {

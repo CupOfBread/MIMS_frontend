@@ -27,20 +27,73 @@
                   :loading="loading"
                   style="margin-bottom: 24px;"
                   :bordered="false"
-                  :title="$t('progress')"
+                  title="项目模块"
                   :body-style="{padding: 0}">
             <a slot="extra">{{$t('all')}}</a>
             <div>
-              <a-card-grid :key="i"
-                           v-for="(item, i) in projects">
+              <a-card-grid key="a">
                 <a-card :bordered="false"
                         :body-style="{padding: 0}">
-                  <a-card-meta :description="item.desc">
+                  <a-card-meta description="入库管理模块">
                     <div slot="title"
                          class="card-title">
                       <a-avatar size="small"
-                                :src="item.logo" />
-                      <span>Alipay</span>
+                                src="https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png" />
+                      <span>入库管理</span>
+                    </div>
+                  </a-card-meta>
+                  <div class="project-item">
+                    <a class="group"
+                       href="/#/">科学搬砖组</a>
+                    <span class="datetime">9小时前</span>
+                  </div>
+                </a-card>
+              </a-card-grid>
+              <a-card-grid key="b">
+                <a-card :bordered="false"
+                        :body-style="{padding: 0}">
+                  <a-card-meta description="出库管理模块">
+                    <div slot="title"
+                         class="card-title">
+                      <a-avatar size="small"
+                                src="https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png" />
+                      <span>出库管理</span>
+                    </div>
+                  </a-card-meta>
+                  <div class="project-item">
+                    <a class="group"
+                       href="/#/">程序员组</a>
+                    <span class="datetime">9小时前</span>
+                  </div>
+                </a-card>
+              </a-card-grid>
+              <a-card-grid key="c">
+                <a-card :bordered="false"
+                        :body-style="{padding: 0}">
+                  <a-card-meta description="库存管理模块">
+                    <div slot="title"
+                         class="card-title">
+                      <a-avatar size="small"
+                                src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
+                      <span>库存管理</span>
+                    </div>
+                  </a-card-meta>
+                  <div class="project-item">
+                    <a class="group"
+                       href="/#/">科学搬砖组</a>
+                    <span class="datetime">9小时前</span>
+                  </div>
+                </a-card>
+              </a-card-grid>
+              <a-card-grid key="d">
+                <a-card :bordered="false"
+                        :body-style="{padding: 0}">
+                  <a-card-meta description="财务管理模块">
+                    <div slot="title"
+                         class="card-title">
+                      <a-avatar size="small"
+                                src="https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png" />
+                      <span>财务管理</span>
                     </div>
                   </a-card-meta>
                   <div class="project-item">
@@ -53,7 +106,7 @@
             </div>
           </a-card>
           <a-card :loading="loading"
-                  :title="$t('dynamic')"
+                  title="操作记录"
                   :bordered="false">
             <a-list>
               <a-list-item :key="index"
@@ -93,7 +146,7 @@
             </div>
           </a-card>
           <a-card :loading="loading"
-                  :title="`XX ${$t('degree')}`"
+                  title="指数"
                   style="margin-bottom: 24px"
                   :bordered="false"
                   :body-style="{padding: 0}">
@@ -102,7 +155,7 @@
             </div>
           </a-card>
           <a-card :loading="loading"
-                  :title="$t('team')"
+                  title="团队"
                   :bordered="false">
             <div class="members">
               <a-row>

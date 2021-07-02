@@ -128,6 +128,7 @@
 </template>
 
 <script>
+import { request } from '@/utils/request'
 import StandardTable from '@/components/table/StandardTable'
 import AddSupplier from '@/pages/inventoryConfig/AddSupplier'
 const columns = [
@@ -214,6 +215,23 @@ export default {
   },
   authorize: {
     deleteRecord: 'delete'
+  },
+  mounted () {
+    let params = {
+      current: 1,
+      size: 20,
+    }
+    let that = this
+    request('/api/supplier/page', 'GET', params, {
+      headers: {
+        'Authorization': '123'
+      }
+    }).then(function (res) {
+      console.log(res.data)
+      let supplierList = res.data.data
+      that.dataSource = supplierList
+      that.$message.success("列表拉取成功", 3)
+    })
   },
   methods: {
     deleteRecord (key) {

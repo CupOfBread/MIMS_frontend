@@ -1,6 +1,6 @@
 <template>
   <a-card>
-    <div :class="advanced ? 'search' : null">
+    <!-- <div :class="advanced ? 'search' : null">
       <a-form layout="horizontal">
         <div :class="advanced ? null: 'fold'">
           <a-row>
@@ -67,14 +67,9 @@
         <span style="float: right; margin-top: 3px;">
           <a-button type="primary">查询</a-button>
           <a-button style="margin-left: 8px">重置</a-button>
-          <!-- <a @click="toggleAdvanced"
-             style="margin-left: 8px">
-            {{advanced ? '收起' : '展开'}}
-            <a-icon :type="advanced ? 'up' : 'down'" />
-          </a> -->
         </span>
       </a-form>
-    </div>
+    </div> -->
     <div>
       <standard-table :columns="columns"
                       :dataSource="dataSource"
@@ -86,16 +81,6 @@
              slot-scope="{text}">
           {{text}}
         </div>
-        <div slot="action"
-             slot-scope="{record}">
-          <a style="margin-right: 8px">
-            <a-icon type="edit" />编辑
-          </a>
-          <a @click="deleteRecord(record.key)">
-            <a-icon type="delete" />删除
-          </a>
-          <router-link :to="`/list/query/detail/${record.key}`">详情</router-link>
-        </div>
         <template slot="statusTitle">
           <a-icon @click.native="onStatusTitleClick"
                   type="info-circle" />
@@ -106,6 +91,7 @@
 </template>
 
 <script>
+import { request } from '@/utils/request'
 import StandardTable from '@/components/table/StandardTable'
 const columns = [
   {
@@ -119,25 +105,10 @@ const columns = [
   {
     title: '仓库数量',
     dataIndex: 'quantity',
-  },
-  {
-    title: '操作',
-    scopedSlots: { customRender: 'action' }
   }
 ]
 
-const dataSource = []
 
-for (let i = 0; i < 100; i++) {
-  dataSource.push({
-    key: i,
-    no: 'NO ' + i,
-    description: '这是一段描述',
-    callNo: Math.floor(Math.random() * 1000),
-    status: Math.floor(Math.random() * 10) % 4,
-    updatedAt: '2018-07-26'
-  })
-}
 
 export default {
   name: 'QueryList',
@@ -146,12 +117,51 @@ export default {
     return {
       advanced: true,
       columns: columns,
-      dataSource: dataSource,
-      selectedRows: []
+      dataSource: [],
+      productList: [],
+      warehouseList: [],
+      userList: [],
+      selectedRows: [],
+      visible: false,
+      confirmLoading: false,
+      labelCol: { span: 4 },
+      wrapperCol: { span: 14 },
+      form: {}
     }
   },
   authorize: {
     deleteRecord: 'delete'
+  },
+  mounted () {
+    let params = {
+      current: 1,
+      size: 20,
+    }
+    let that = this
+    request('/api/inventory/page', 'GET', params, {
+      headers: {
+        'Authorization': '123'
+      }
+    }).then(function (res) {
+      console.log(res.data)
+      let inventoryList = res.data.data.inventoryList
+      that.productList = res.data.data.productList
+      that.warehouseList = res.data.data.warehouseList
+      for (let i = 0; i < inventoryList.length; i++) {
+        let item = inventoryList[i]
+        item.key = item.id
+        for (let j = 0; j < that.productList.length; j++) {
+          if (item.pId == that.productList[j].id) item.pId = that.productList[j].name
+        }
+
+        for (let j = 0; j < that.warehouseList.length; j++) {
+          if (item.wId == that.warehouseList[j].id) item.wId = that.warehouseList[j].name
+        }
+
+        that.dataSource = inventoryList
+      }
+      that.$message.success("列表拉取成功", 3)
+    })
   },
   methods: {
     deleteRecord (key) {

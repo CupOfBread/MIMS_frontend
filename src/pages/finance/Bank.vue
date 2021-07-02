@@ -123,6 +123,7 @@
 </template>
 
 <script>
+import { request } from '@/utils/request'
 import StandardTable from '@/components/table/StandardTable'
 import AddBank from '@/pages/finance/AddBank'
 const columns = [
@@ -146,16 +147,6 @@ const columns = [
 
 const dataSource = []
 
-for (let i = 0; i < 100; i++) {
-  dataSource.push({
-    key: i,
-    no: 'NO ' + i,
-    description: '这是一段描述',
-    callNo: Math.floor(Math.random() * 1000),
-    status: Math.floor(Math.random() * 10) % 4,
-    updatedAt: '2018-07-26'
-  })
-}
 
 export default {
   name: 'QueryList',
@@ -171,6 +162,22 @@ export default {
   },
   authorize: {
     deleteRecord: 'delete'
+  },
+  mounted () {
+    let params = {
+      current: 1,
+      size: 20,
+    }
+    let that = this
+    request('/api/bank/page', 'GET', params, {
+      headers: {
+        'Authorization': '123'
+      }
+    }).then(function (res) {
+      console.log(res.data)
+      that.dataSource = res.data.data.records
+      that.$message.success("列表拉取成功", 3)
+    })
   },
   methods: {
     deleteRecord (key) {

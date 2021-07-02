@@ -39,12 +39,12 @@ const welcomeMessages = [
     US: 'what are you going to eat',
   },
   {
-    CN: '要不要打一把 DOTA',
+    CN: '要不要来一杯卡布奇诺？',
     HK: '要不要打一把 DOTA',
     US: 'how about a game of DOTA',
   },
   {
-    CN: '我猜你可能累了',
+    CN: '加油努力上班',
     HK: '我猜你可能累了',
     US: 'i guess you might be tired',
   }

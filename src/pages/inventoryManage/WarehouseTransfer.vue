@@ -1,6 +1,6 @@
 <template>
   <a-card>
-    <div :class="advanced ? 'search' : null">
+    <!-- <div :class="advanced ? 'search' : null">
       <a-form layout="horizontal">
         <div :class="advanced ? null: 'fold'">
           <a-row>
@@ -67,14 +67,9 @@
         <span style="float: right; margin-top: 3px;">
           <a-button type="primary">查询</a-button>
           <a-button style="margin-left: 8px">重置</a-button>
-          <!-- <a @click="toggleAdvanced"
-             style="margin-left: 8px">
-            {{advanced ? '收起' : '展开'}}
-            <a-icon :type="advanced ? 'up' : 'down'" />
-          </a> -->
         </span>
       </a-form>
-    </div>
+    </div> -->
     <div>
       <a-space class="operator">
         <a-button @click="addNew"
@@ -102,16 +97,6 @@
              slot-scope="{text}">
           {{text}}
         </div>
-        <div slot="action"
-             slot-scope="{record}">
-          <a style="margin-right: 8px">
-            <a-icon type="edit" />编辑
-          </a>
-          <a @click="deleteRecord(record.key)">
-            <a-icon type="delete" />删除
-          </a>
-          <router-link :to="`/list/query/detail/${record.key}`">详情</router-link>
-        </div>
         <template slot="statusTitle">
           <a-icon @click.native="onStatusTitleClick"
                   type="info-circle" />
@@ -128,6 +113,7 @@
 </template>
 
 <script>
+import { request } from '@/utils/request'
 import StandardTable from '@/components/table/StandardTable'
 import AddWarehouseTransfer from '@/pages/inventoryManage/AddWarehouseTransfer'
 const columns = [
@@ -153,16 +139,12 @@ const columns = [
   },
   {
     title: '创建时间',
-    dataIndex: 'updateAt',
+    dataIndex: 'createTime',
     sorter: true
   },
   {
     title: '备注',
     dataIndex: 'remark',
-  },
-  {
-    title: '操作',
-    scopedSlots: { customRender: 'action' }
   }
 ]
 
@@ -186,13 +168,59 @@ export default {
     return {
       advanced: true,
       columns: columns,
-      dataSource: dataSource,
+      dataSource: [],
+      productList: [],
+      warehouseIn: [],
+      userList: [],
       selectedRows: [],
-      visible: false
+      visible: false,
+      confirmLoading: false,
+      labelCol: { span: 4 },
+      wrapperCol: { span: 14 },
+      form: {}
     }
   },
   authorize: {
     deleteRecord: 'delete'
+  },
+  mounted () {
+    let params = {
+      current: 1,
+      size: 20,
+      startTime: '2020/01/01',
+      endTime: '2022/06/09'
+    }
+    let that = this
+    request('/api/warehouse/t/page', 'GET', params, {
+      headers: {
+        'Authorization': '123'
+      }
+    }).then(function (res) {
+      console.log(res.data)
+      let warehouseTransferList = res.data.data.warehouseTransferList
+      that.productList = res.data.data.productList
+      that.warehouseIn = res.data.data.warehouseIn
+      that.warehouseOut = res.data.data.warehouseOut
+      that.userList = res.data.data.userList
+      for (let i = 0; i < warehouseTransferList.length; i++) {
+        let item = warehouseTransferList[i]
+        item.key = item.id
+        for (let j = 0; j < that.productList.length; j++) {
+          if (item.pId == that.productList[j].id) item.pId = that.productList[j].name
+        }
+        for (let j = 0; j < that.warehouseIn.length; j++) {
+          if (item.sId == that.warehouseIn[j].id) item.sId = that.warehouseIn[j].name
+        }
+        for (let j = 0; j < that.warehouseOut.length; j++) {
+          if (item.sId == that.warehouseOut[j].id) item.sId = that.warehouseOut[j].name
+        }
+        for (let j = 0; j < that.userList.length; j++) {
+          if (item.uId == that.userList[j].id) item.uId = that.userList[j].name
+        }
+        that.dataSource = warehouseTransferList
+      }
+      that.$message.success("列表拉取成功", 3)
+    })
   },
   methods: {
     deleteRecord (key) {

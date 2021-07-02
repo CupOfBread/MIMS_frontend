@@ -122,6 +122,7 @@
 </template>
 
 <script>
+import { request } from '@/utils/request'
 import StandardTable from '@/components/table/StandardTable'
 const columns = [
   {
@@ -146,7 +147,7 @@ const columns = [
   },
   {
     title: '创建时间',
-    dataIndex: 'updateAt',
+    dataIndex: 'createTime',
     sorter: true
   },
   {
@@ -216,12 +217,60 @@ export default {
     return {
       advanced: true,
       columns: columns,
-      dataSource: dataSource,
-      selectedRows: []
+      dataSource: [],
+      productList: [],
+      expressList: [],
+      warehouseList: [],
+      userList: [],
+      selectedRows: [],
+      newFromvisible: false,
+      confirmLoading: false,
+      labelCol: { span: 4 },
+      wrapperCol: { span: 14 },
+      form: {}
     }
   },
   authorize: {
     deleteRecord: 'delete'
+  },
+  mounted () {
+    let params = {
+      current: 1,
+      size: 20,
+      startTime: '2020/01/01',
+      endTime: '2022/06/09'
+    }
+    let that = this
+    request('/api/product/out/record', 'GET', params, {
+      headers: {
+        'Authorization': '123'
+      }
+    }).then(function (res) {
+      console.log(res.data)
+      let recordList = res.data.data.recordList
+      that.productList = res.data.data.productList
+      that.expressList = res.data.data.expressList
+      that.userList = res.data.data.userList
+      that.warehouseList = res.data.data.warehouseList
+      for (let i = 0; i < recordList.length; i++) {
+        let item = recordList[i]
+        item.key = item.id
+        for (let j = 0; j < that.productList.length; j++) {
+          if (item.pId == that.productList[j].id) item.pId = that.productList[j].name
+        }
+        for (let j = 0; j < that.expressList.length; j++) {
+          if (item.sId == that.expressList[j].id) item.sId = that.expressList[j].name
+        }
+        for (let j = 0; j < that.warehouseList.length; j++) {
+          if (item.wId == that.warehouseList[j].id) item.wId = that.warehouseList[j].name
+        }
+        for (let j = 0; j < that.userList.length; j++) {
+          if (item.uId == that.userList[j].id) item.uId = that.userList[j].name
+        }
+        that.dataSource = recordList
+      }
+      that.$message.success("列表拉取成功", 3)
+    })
   },
   methods: {
     deleteRecord (key) {

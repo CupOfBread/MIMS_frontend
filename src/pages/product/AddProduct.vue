@@ -73,6 +73,11 @@ export default {
     return {
       form: {}
     }
+  },
+  methods: {
+    getVal () {
+      return this.form
+    }
   }
 }
 </script>

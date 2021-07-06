@@ -107,13 +107,14 @@
              :visible="visible"
              @ok="handleOk"
              @cancel="handleCancel">
-      <AddWarehouseTransfer />
+      <AddWarehouseTransfer ref="addWarehouseTransfer" />
     </a-modal>
   </a-card>
 </template>
 
 <script>
 import { request } from '@/utils/request'
+import qs from 'qs'
 import StandardTable from '@/components/table/StandardTable'
 import AddWarehouseTransfer from '@/pages/inventoryManage/AddWarehouseTransfer'
 const columns = [
@@ -180,9 +181,7 @@ export default {
       form: {}
     }
   },
-  authorize: {
-    deleteRecord: 'delete'
-  },
+
   mounted () {
     let params = {
       current: 1,
@@ -224,8 +223,8 @@ export default {
   },
   methods: {
     deleteRecord (key) {
-      this.dataSource = this.dataSource.filter(item => item.key !== key)
-      this.selectedRows = this.selectedRows.filter(item => item.key !== key)
+      this.dataSource = this.dataSource.filter(item => item.id !== key)
+      this.selectedRows = this.selectedRows.filter(item => item.id !== key)
     },
     toggleAdvanced () {
       this.advanced = !this.advanced
@@ -255,7 +254,16 @@ export default {
       }
     },
     handleOk () {
-
+      let data = this.$refs.addWarehouseTransfer.getVal();
+      let that = this
+      request('/api/warehouse/t/add', 'post', qs.stringify(data), {
+        headers: {
+          'Authorization': '123'
+        }
+      }).then(function (res) {
+        console.log(res)
+        that.$message.success("提交成功", 3)
+      })
     },
     handleCancel () {
       this.visible = false

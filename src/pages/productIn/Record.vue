@@ -111,7 +111,7 @@
           <a style="margin-right: 8px">
             <a-icon type="edit" />编辑
           </a>
-          <a @click="deleteRecord(record.key)">
+          <a @click="deleteRecord(record.id)">
             <a-icon type="delete" />删除
           </a>
 
@@ -203,9 +203,7 @@ export default {
       form: {}
     }
   },
-  authorize: {
-    deleteRecord: 'delete'
-  },
+
   mounted () {
     let params = {
       current: 1,
@@ -247,8 +245,8 @@ export default {
   },
   methods: {
     deleteRecord (key) {
-      this.dataSource = this.dataSource.filter(item => item.key !== key)
-      this.selectedRows = this.selectedRows.filter(item => item.key !== key)
+      this.dataSource = this.dataSource.filter(item => item.id !== key)
+      this.selectedRows = this.selectedRows.filter(item => item.id !== key)
     },
     toggleAdvanced () {
       this.advanced = !this.advanced

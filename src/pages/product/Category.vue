@@ -1,80 +1,5 @@
 <template>
   <a-card>
-    <div :class="advanced ? 'search' : null">
-      <a-form layout="horizontal">
-        <div :class="advanced ? null: 'fold'">
-          <a-row>
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="规则编号"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-input placeholder="请输入" />
-              </a-form-item>
-            </a-col>
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="使用状态"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-select placeholder="请选择">
-                  <a-select-option value="1">关闭</a-select-option>
-                  <a-select-option value="2">运行中</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="调用次数"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-input-number style="width: 100%"
-                                placeholder="请输入" />
-              </a-form-item>
-            </a-col>
-          </a-row>
-          <a-row v-if="advanced">
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="更新日期"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-date-picker style="width: 100%"
-                               placeholder="请输入更新日期" />
-              </a-form-item>
-            </a-col>
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="使用状态"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-select placeholder="请选择">
-                  <a-select-option value="1">关闭</a-select-option>
-                  <a-select-option value="2">运行中</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="描述"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-input placeholder="请输入" />
-              </a-form-item>
-            </a-col>
-          </a-row>
-        </div>
-        <span style="float: right; margin-top: 3px;">
-          <a-button type="primary">查询</a-button>
-          <a-button style="margin-left: 8px">重置</a-button>
-          <!-- <a @click="toggleAdvanced"
-             style="margin-left: 8px">
-            {{advanced ? '收起' : '展开'}}
-            <a-icon :type="advanced ? 'up' : 'down'" />
-          </a> -->
-        </span>
-      </a-form>
-    </div>
     <div>
       <a-space class="operator">
         <a-button @click="addNew"
@@ -107,7 +32,7 @@
           <a style="margin-right: 8px">
             <a-icon type="edit" />编辑
           </a>
-          <a @click="deleteRecord(record.key)">
+          <a @click="deleteRecord(record.id)">
             <a-icon type="delete" />删除
           </a>
           <router-link :to="`/list/query/detail/${record.key}`">详情</router-link>
@@ -122,7 +47,7 @@
              :visible="visible"
              @ok="handleOk"
              @cancel="handleCancel">
-      <AddCategory />
+      <AddCategory ref="addCategory" />
     </a-modal>
   </a-card>
 </template>
@@ -156,9 +81,7 @@ export default {
       visible: false
     }
   },
-  authorize: {
-    deleteRecord: 'delete'
-  },
+
   mounted () {
     let params = {
       current: 1,
@@ -177,8 +100,8 @@ export default {
   },
   methods: {
     deleteRecord (key) {
-      this.dataSource = this.dataSource.filter(item => item.key !== key)
-      this.selectedRows = this.selectedRows.filter(item => item.key !== key)
+      this.dataSource = this.dataSource.filter(item => item.id !== key)
+      this.selectedRows = this.selectedRows.filter(item => item.id !== key)
     },
     toggleAdvanced () {
       this.advanced = !this.advanced
@@ -208,7 +131,8 @@ export default {
       }
     },
     handleOk () {
-
+      let data = this.$refs.addCategory.getVal()
+      this.dataSource.push(data)
     },
     handleCancel () {
       this.visible = false

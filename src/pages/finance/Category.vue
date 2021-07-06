@@ -32,7 +32,7 @@
           <a style="margin-right: 8px">
             <a-icon type="edit" />编辑
           </a>
-          <a @click="deleteRecord(record.key)">
+          <a @click="deleteRecord(record.id)">
             <a-icon type="delete" />删除
           </a>
           <router-link :to="`/list/query/detail/${record.key}`">详情</router-link>
@@ -73,17 +73,6 @@ const columns = [
 
 const dataSource = []
 
-for (let i = 0; i < 100; i++) {
-  dataSource.push({
-    key: i,
-    no: 'NO ' + i,
-    description: '这是一段描述',
-    callNo: Math.floor(Math.random() * 1000),
-    status: Math.floor(Math.random() * 10) % 4,
-    updatedAt: '2018-07-26'
-  })
-}
-
 export default {
   name: 'QueryList',
   components: { StandardTable, AddCategory },
@@ -96,13 +85,13 @@ export default {
       visible: false
     }
   },
-  authorize: {
-    deleteRecord: 'delete'
-  },
+
   mounted () {
     let params = {
       current: 1,
       size: 20,
+      startTime: '2020/01/01',
+      endTime: '2022/06/09'
     }
     let that = this
     request('/api/bank/c/page', 'GET', params, {
@@ -117,8 +106,8 @@ export default {
   },
   methods: {
     deleteRecord (key) {
-      this.dataSource = this.dataSource.filter(item => item.key !== key)
-      this.selectedRows = this.selectedRows.filter(item => item.key !== key)
+      this.dataSource = this.dataSource.filter(item => item.id !== key)
+      this.selectedRows = this.selectedRows.filter(item => item.id !== key)
     },
     toggleAdvanced () {
       this.advanced = !this.advanced

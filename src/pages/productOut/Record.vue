@@ -1,80 +1,5 @@
 <template>
   <a-card>
-    <div :class="advanced ? 'search' : null">
-      <a-form layout="horizontal">
-        <div :class="advanced ? null: 'fold'">
-          <a-row>
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="规则编号"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-input placeholder="请输入" />
-              </a-form-item>
-            </a-col>
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="使用状态"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-select placeholder="请选择">
-                  <a-select-option value="1">关闭</a-select-option>
-                  <a-select-option value="2">运行中</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="调用次数"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-input-number style="width: 100%"
-                                placeholder="请输入" />
-              </a-form-item>
-            </a-col>
-          </a-row>
-          <a-row v-if="advanced">
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="更新日期"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-date-picker style="width: 100%"
-                               placeholder="请输入更新日期" />
-              </a-form-item>
-            </a-col>
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="使用状态"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-select placeholder="请选择">
-                  <a-select-option value="1">关闭</a-select-option>
-                  <a-select-option value="2">运行中</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :md="8"
-                   :sm="24">
-              <a-form-item label="描述"
-                           :labelCol="{span: 5}"
-                           :wrapperCol="{span: 18, offset: 1}">
-                <a-input placeholder="请输入" />
-              </a-form-item>
-            </a-col>
-          </a-row>
-        </div>
-        <span style="float: right; margin-top: 3px;">
-          <a-button type="primary">查询</a-button>
-          <a-button style="margin-left: 8px">重置</a-button>
-          <!-- <a @click="toggleAdvanced"
-             style="margin-left: 8px">
-            {{advanced ? '收起' : '展开'}}
-            <a-icon :type="advanced ? 'up' : 'down'" />
-          </a> -->
-        </span>
-      </a-form>
-    </div>
     <div>
       <a-space class="operator">
         <a-button @click="addNew"
@@ -297,7 +222,7 @@ export default {
       // this.$message.info('选中行改变了')
     },
     addNew () {
-      this.visible = true
+      this.$router.push('/product_out/add')
     },
     handleMenuClick (e) {
       if (e.key === 'delete') {

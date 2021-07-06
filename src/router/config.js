@@ -85,7 +85,7 @@ const options = {
           meta: {
             icon: 'shop'
           },
-          component: BlankView,
+          component: PageView,
           children: [
             {
               path: 'add',
